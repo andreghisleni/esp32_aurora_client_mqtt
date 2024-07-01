@@ -104,27 +104,27 @@ void parsePacket(String packet){
 
 void analizePinsState(){
   if(pinsState[0]){ // painel online
-    digitalWrite(outputPins[0], LOW);
-  }else {
     digitalWrite(outputPins[0], HIGH);
+  }else {
+    digitalWrite(outputPins[0], LOW);
   }
   if(pinsState[1]){ // painel online
-    digitalWrite(outputPins[1], LOW);
-  }else {
     digitalWrite(outputPins[1], HIGH);
+  }else {
+    digitalWrite(outputPins[1], LOW);
   }  
   if(pinsState[2]){ // painel online
-    digitalWrite(outputPins[2], LOW);
-  }else {
     digitalWrite(outputPins[2], HIGH);
+  }else {
+    digitalWrite(outputPins[2], LOW);
   } 
   if((pinsState[1] || pinsState[2]) && !buzzerSilenced){
-    digitalWrite(outputPins[3], LOW);
+    digitalWrite(outputPins[3], HIGH);
     buzzerLigado = true;
   } else if((pinsState[1] || pinsState[2]) && buzzerSilenced) {
-    digitalWrite(outputPins[3], HIGH);
+    digitalWrite(outputPins[3], LOW);
   } else {
-    digitalWrite(outputPins[3], HIGH);
+    digitalWrite(outputPins[3], LOW);
     buzzerLigado = false;
   }
 }
@@ -140,7 +140,7 @@ void loopTimer(void *pvParameters){
     }
 
     if(timeroffline > 60 /*um minuto*/){
-      digitalWrite(outputPins[0], LOW);
+      digitalWrite(outputPins[0], HIGH);
     }
     timeroffline++;
 
@@ -168,7 +168,7 @@ void setup()
 {
   for (int i = 0; i < numOutputPinos; i++) {
     pinMode(outputPins[i], OUTPUT);
-    digitalWrite(outputPins[i], HIGH);
+    digitalWrite(outputPins[i], LOW);
   }
 
   pinMode(pinBotaoSilenciar, INPUT_PULLUP);
